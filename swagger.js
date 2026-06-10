@@ -1,35 +1,62 @@
-const swaggerJsdoc = require('swagger-jsdoc');
-
-const options = {
-    definition: {
-        openapi: '3.0.0',
-        info: {
-            title: 'Oahu Water API',
-            version: '1.0.0'
+// swagger.js
+const swaggerSpec = {
+    openapi: '3.0.0',
+    info: {
+        title: 'Dept. of Emergency Management Oahu API Docs',
+        version: '1.0.0'
+    },
+    tags: [
+        { name: 'water', description: 'Stream gauge endpoints' },
+        { name: 'gis', description: 'GIS endpoints' },
+        { name: 'id', description: 'ID badge reader' }
+    ],
+    servers: [{ url: 'https://api.oahudem.com' }],
+    paths: {
+        '/water/get-active-locations': {
+            get: {
+                tags: ['water'],
+                summary: 'get all active gauge locations',
+                responses: { 200: { description: 'Success' } }
+            }
         },
-        servers: [{ url: 'https://api.oahudem.com' }],
-        paths: {
-            '/water/get-active-locations': {
-                get: {
-                    summary: 'get all active gauge locations',
-                    responses: { 200: { description: 'Success' } }
-                }
-            },
-            '/water/get-table-overview': {
-                get: {
-                    summary: 'get all active gauge locations current readings for display',
-                    responses: { 200: { description: 'Success' } }
-                }
-            },
-            '/water/get-graph-data': {
-                get: {
-                    summary: 'get gauge locations gauge readings data',
-                    responses: { 200: { description: 'Success' } }
+        '/water/get-table-overview': {
+            get: {
+                tags: ['water'],
+                summary: 'get all active gauge locations current readings for display',
+                responses: { 200: { description: 'Success' } }
+            }
+        },
+        '/water/get-graph-data': {
+            get: {
+                tags: ['water'],
+                summary: 'get gauge locations gauge readings data',
+                description: 'Returns historical readings for one or more gauges over the past 30 days',
+                parameters: [
+                    {
+                        name: 'gauge_id',
+                        in: 'query',
+                        required: true,
+                        description: 'Comma seperated string of gauge_ids. Must be an active location ie. "USGS-16200000,OA-0001"',
+                        schema: { type: 'string' },
+                    }
+                ],
+                responses: {
+                    200: {
+                        description: 'Readings grouped by gauge ID',
+                        content: {
+                            'application/json': {
+                                example: {
+                                    'USGS-16200000': [
+                                        { time: '2026-06-01T00:00:00Z', value: 2.73 }
+                                    ]
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }
-    },
-    apis: []
+    }
 };
 
-module.exports = swaggerJsdoc(options);
+module.exports = swaggerSpec;

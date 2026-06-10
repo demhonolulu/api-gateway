@@ -9,7 +9,7 @@ const PORT = 3000;
 
 
 app.use('/favicon.ico', express.static(path.join(__dirname, 'favicon.ico')));
-app.use('/', swaggerUi.serve, swaggerUi.setup(swaggerSpec, {
+app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec, {
     customCss: '.swagger-ui .topbar { display: none }',
     customfavIcon: '/favicon.ico'
 }));
