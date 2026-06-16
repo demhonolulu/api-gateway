@@ -11,13 +11,13 @@ const PORT = 3000;
 
 app.use('/favicon.ico', express.static(path.join(__dirname, 'favicon.ico')));
 
-// API key check for all /water routes
-app.use('/water', (req, res, next) => {
-    if (req.headers['x-api-key'] !== process.env.API_KEY) {
-        return res.status(403).json({ error: 'Forbidden' });
-    }
-    next();
-});
+// // API key check for all /water routes
+// app.use('/water', (req, res, next) => {
+//     if (req.headers['x-api-key'] !== process.env.API_KEY) {
+//         return res.status(403).json({ error: 'Forbidden' });
+//     }
+//     next();
+// });
 
 app.use('/', swaggerUi.serve);
 app.get('/', swaggerUi.setup(swaggerSpec, {
