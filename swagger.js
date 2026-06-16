@@ -2,7 +2,7 @@
 const swaggerSpec = {
     openapi: '3.0.0',
     info: {
-        title: 'Dept. of Emergency Management Oahu API Docs',
+        title: 'Oahu Dept. of Emergency Management API Docs',
         version: '1.0.0'
     },
     tags: [
@@ -59,4 +59,5 @@ const swaggerSpec = {
     }
 };
 
+console.log("swagger loaded");
 module.exports = swaggerSpec;
