@@ -16,6 +16,15 @@ const swaggerSpec = {
             get: {
                 tags: ['water'],
                 summary: 'get all active gauge locations',
+                parameters: [
+                    {
+                        name: 'flat',
+                        in: 'query',
+                        required: true,
+                        description: 'Returns a flat area with display order',
+                        schema: { type: 'boolean' },
+                    }
+                ],
                 responses: { 200: { description: 'Success' } }
             }
         },
