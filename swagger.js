@@ -32,6 +32,15 @@ const swaggerSpec = {
             get: {
                 tags: ['water'],
                 summary: 'get all active gauge locations current readings for display',
+                parameters: [
+                    {
+                        name: 'locations',
+                        in: 'query',
+                        required: true,
+                        description: 'Flat string of comma seperated gauge ids of locations to pull',
+                        schema: { type: 'string' },
+                    }
+                ],
                 responses: { 200: { description: 'Success' } }
             }
         },
