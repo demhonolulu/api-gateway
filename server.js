@@ -27,8 +27,9 @@ app.get('/', swaggerUi.setup(swaggerSpec, {
 }));
 
 app.use('/water', createProxyMiddleware({ target: 'http://localhost:3001', changeOrigin: true }));
-//app.use('/gis', createProxyMiddleware({ target: 'http://localhost:3002', changeOrigin: true }));
+app.use('/gis', createProxyMiddleware({ target: 'http://localhost:3002', changeOrigin: true }));
 app.use('/webeoc', createProxyMiddleware({ target: 'http://localhost:3003', changeOrigin: true }));
+app.use('/checkin', createProxyMiddleware({ target: 'http://localhost:3004', changeOrigin: true }));
 
 app.listen(PORT, () => {
     console.log(`API Gateway running on port ${PORT}`);
